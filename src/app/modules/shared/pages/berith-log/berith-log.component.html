@@ -1,0 +1,11 @@
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Log" (nzOnCancel)="handleCancel()" 
+    [nzFooter]="modalFooter" [nzStyle]="{ top: '20px' }" [nzBodyStyle]="{ height: '600px' }" [nzWidth]="800">
+  <div nz-row>
+    <div nz-col nzSpan="24" style="overflow-y: auto; height: 550px; background-color: #343a40;">
+      <div *ngFor='let str of logs' style="color: white;"> {{str}} </div>
+    </div>
+  </div>
+  <ng-template #modalFooter>
+      <button nz-button nzType="default" (click)="handleClear()">Clear</button>
+    </ng-template>
+</nz-modal>

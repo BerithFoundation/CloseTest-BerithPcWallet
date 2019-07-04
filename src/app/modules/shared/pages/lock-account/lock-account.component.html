@@ -1,0 +1,26 @@
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Password" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzOkDisabled]="!lockAccountForm.valid">
+  <form nz-form [formGroup]="lockAccountForm">
+    <nz-form-item>
+        <nz-form-control>
+          <nz-input-group [nzSuffix]="suffixTemplate">
+              <input
+                [type]="passwordVisible ? 'text' : 'password'"
+                nz-input
+                placeholder="패스워드"
+                [(ngModel)]="password"
+                name="password"
+                formControlName="password"
+              />
+            </nz-input-group>
+            <ng-template #suffixTemplate>
+              <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
+          </ng-template>
+          <nz-form-explain *ngIf="lockAccountForm.get('password')?.dirty && lockAccountForm.get('password')?.errors">
+            <ng-container *ngIf="lockAccountForm.get('password')?.hasError('required')">
+              패스워드를 입력하세요.
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+    </nz-form-item >
+  </form>
+</nz-modal>

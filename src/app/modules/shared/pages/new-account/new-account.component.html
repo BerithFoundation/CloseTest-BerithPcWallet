@@ -1,0 +1,55 @@
+<nz-modal [(nzVisible)]="isVisible" nzTitle="New Account" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzOkDisabled]="!newAccountForm.valid">
+	<form nz-form [formGroup]="newAccountForm">
+		<nz-form-item>
+			<nz-form-control>
+				<nz-input-group [nzSuffix]="suffixTemplate">
+					<input
+						[type]="passwordVisible ? 'text' : 'password'"
+						nz-input
+						placeholder="패스워드"
+						[(ngModel)]="password"
+						name="password"
+						id = "password"
+						formControlName="password"
+						(ngModelChange)="updateConfirmValidator()"
+					/>
+				</nz-input-group>
+				<ng-template #suffixTemplate>
+					<i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
+				</ng-template>
+				<nz-form-explain *ngIf="newAccountForm.get('password')?.dirty && newAccountForm.get('password')?.errors">
+					<ng-container *ngIf="newAccountForm.get('password')?.hasError('required')">
+						패스워드를 입력하세요.
+					</ng-container>
+				</nz-form-explain>
+			</nz-form-control>
+		</nz-form-item >
+		<nz-form-item>
+			<nz-form-control>
+				<nz-input-group [nzSuffix]="suffixTemplate2">
+						<input
+							[type]="confirmPasswordVisible ? 'text' : 'password'"
+							nz-input
+							placeholder="패스워드 확인"
+							[(ngModel)]="confirmPassword"
+							name="confirmPassword"
+							id = "confirmPassword"
+							formControlName="confirmPassword"
+						/>
+					</nz-input-group>
+					<ng-template #suffixTemplate2>
+						<i nz-icon [nzType]="confirmPasswordVisible ? 'eye-invisible' : 'eye'" (click)="confirmPasswordVisible = !confirmPasswordVisible"></i>
+					</ng-template>
+          <nz-form-explain
+            *ngIf="newAccountForm.get('confirmPassword')?.dirty && newAccountForm.get('confirmPassword')?.errors">
+            <ng-container *ngIf="newAccountForm.get('confirmPassword')?.hasError('required')">
+							패스워드를 한번더 입력하세요.
+            </ng-container>
+            <ng-container *ngIf="newAccountForm.get('confirmPassword')?.hasError('confirm')">
+							패스워드가 일치하지 않습니다.
+            </ng-container>
+          </nz-form-explain>
+			</nz-form-control>
+		</nz-form-item >
+	</form>
+</nz-modal>

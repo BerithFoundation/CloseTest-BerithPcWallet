@@ -1,0 +1,28 @@
+
+<nz-layout style="height: 100%;">
+  <nz-header>
+      <app-shared-top (collapsed)="onCollapsed($event)"></app-shared-top>
+  </nz-header>
+
+
+  <nz-layout>
+    <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed">
+      <app-shared-left [isCollapsed]="isCollapsed"></app-shared-left>
+    </nz-sider>
+        
+    <nz-layout>
+      <nz-content>
+        <router-outlet></router-outlet>
+      </nz-content>
+
+
+    </nz-layout>
+  </nz-layout>
+ 
+  <!-- <nz-footer style="text-align: center;">ⓒ Copyright 2019 Berith - All Rights Reserved</nz-footer> -->
+  <nz-footer style="text-align: center;">
+    <app-shared-bottom></app-shared-bottom>
+  </nz-footer>
+
+</nz-layout>
+

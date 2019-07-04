@@ -1,0 +1,117 @@
+<div style="padding:24px; background: #f0f2f5; min-height: 360px;">
+  <div nz-row nzGutter="16">
+    <div nz-col nzSpan="12">
+        <div class="balance-box main-balance-box">
+          <!-- <h5>Main Balance</h5> -->
+          <!-- <p>{{balance}}</p> -->
+          <p><nz-statistic [nzValue]="balance | number:'.8-8'" [nzTitle]="'Main Balance'"></nz-statistic></p>
+        </div>
+    </div>
+    <div nz-col nzSpan="12">
+      <div class="balance-box stake-balance-box">
+        <!-- <h5>Stake Balance</h5> -->
+        <!-- <p>{{stakeBalance}}</p> -->
+        <p><nz-statistic [nzValue]="stakeBalance | number:'.8-8'" [nzTitle]="'Stake Balance'"></nz-statistic></p>
+      </div>
+    </div>
+  </div>
+  <div nz-row nzGutter="16">
+    <div nz-col nzSpan="6">
+        <h5>Transaction</h5>
+        <form nz-form [formGroup]="transactionForm" (ngSubmit)="sendTransaction()">
+          <nz-form-item>
+            <nz-form-control>
+              <input nz-input placeholder="받는사람" formControlName="sendAdd" required>
+              <nz-form-explain
+                  *ngIf="
+                    (transactionForm.get('sendAdd')?.dirty && transactionForm.get('sendAdd')?.errors) ||
+                    transactionForm.get('sendAdd')?.pending
+                  "
+                  >
+                <ng-container *ngIf="transactionForm.get('sendAdd')?.hasError('required')">
+                  받는 사람을 입력하세요.
+                </ng-container>
+              </nz-form-explain>
+            </nz-form-control>
+          </nz-form-item >
+          <nz-form-item>
+            <nz-form-control>
+              <input nz-input placeholder="수량" formControlName="sendAmt" required />
+              <nz-form-explain
+                  *ngIf="
+                    (transactionForm.get('sendAmt')?.dirty && transactionForm.get('sendAmt')?.errors) ||
+                    transactionForm.get('sendAmt')?.pending
+                  "
+                  >
+                <ng-container *ngIf="transactionForm.get('sendAmt')?.hasError('required')">
+                  수량을 입력하세요.
+                </ng-container>
+                <ng-container *ngIf="transactionForm.get('sendAmt')?.hasError('pattern')">
+                  숫자를 입력하세요.
+                </ng-container>
+                <ng-container *ngIf="transactionForm.get('sendAmt')?.hasError('invalid1')">
+                  소수점 8자리 이하로 입력하세요.
+                </ng-container>
+              </nz-form-explain>
+            </nz-form-control>
+          </nz-form-item >
+          <nz-form-item>
+            <nz-form-control>
+              <button nz-button nzType="primary" [disabled]="!transactionForm.valid" (click)="sendTransaction()">보내기</button>
+            </nz-form-control>
+          </nz-form-item >
+        </form>
+        <h5 class="pt-3">Stake</h5>
+        <form nz-form [formGroup]="stakeForm">
+          <nz-form-item>
+            <nz-form-control>
+              <input nz-input placeholder="수량" formControlName="stakeAmt" required alt="dddd" />
+              <nz-form-explain
+                  *ngIf="
+                    (stakeForm.get('stakeAmt')?.dirty && stakeForm.get('stakeAmt')?.errors) ||
+                    stakeForm.get('stakeAmt')?.pending
+                  "
+                  >
+                <ng-container *ngIf="stakeForm.get('stakeAmt')?.hasError('required')">
+                  수량을 입력하세요.
+                </ng-container>
+                <ng-container *ngIf="stakeForm.get('stakeAmt')?.hasError('pattern')">
+                  숫자를 입력하세요.
+                </ng-container>
+                <ng-container *ngIf="stakeForm.get('stakeAmt')?.hasError('invalid1')">
+                  소수점 8자리 이하로 입력하세요.
+                </ng-container>
+              </nz-form-explain>
+            </nz-form-control>
+          </nz-form-item >
+          <nz-form-item>
+            <nz-form-control>
+              <button nz-button nzType="primary" [disabled]="!stakeForm.valid" (click)="stakeTransaction()">보내기</button>
+              &nbsp;&nbsp;
+              <!-- <button nz-button nzType="primary" (click)="stopStaking()">STOP</button> -->
+              
+            </nz-form-control>
+          </nz-form-item >
+          <nz-form-item>
+            <button nz-button nzType="primary" (click)="miningStart()">mining Start</button>
+              &nbsp;&nbsp;
+            <button nz-button nzType="primary" (click)="miningStop()">mining Stop</button>
+          </nz-form-item >
+        </form>
+        
+    </div>
+    <div nz-col nzSpan="18">
+      <nz-table #basicTable [nzData]="listOfData">
+        <tbody>
+          <tr *ngFor="let data of basicTable.data">
+            <td><img src="assets/images/b{{data.base}}t{{data.target}}.png"></td><!-- base가 1(main)이고 target이 2(stake)일 때, 그림파일명은 b1t2.png 이다 -->
+            <td>{{ data.from }}</td>
+            <td>{{ data.to }}</td>
+            <td>{{getTransactionText(data.base, data.target , data.receive)}}</td>
+            <td>{{ data.value | number:'.0-8' }}</td>
+          </tr>
+        </tbody>
+      </nz-table> 
+    </div>
+  </div> 
+</div>

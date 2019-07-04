@@ -1,0 +1,90 @@
+<div style="padding:24px; background: #f0f2f5; min-height: 360px;">
+  <div nz-row nzGutter="16">
+    <div nz-col nzSpan="12">
+        <div class="balance-box main-balance-box">
+          <!-- <h5>Main Balance</h5> -->
+          <!-- <p>{{balance}}</p> -->
+          <p><nz-statistic [nzValue]="balance | number:'.8-8'" [nzTitle]="'Main Balance'"></nz-statistic></p>
+        </div>
+    </div>
+    <div nz-col nzSpan="12">
+      <div class="balance-box reward-balance-box">
+        <!-- <h5>Reward Balance</h5> -->
+        <!-- <p>{{rewardBalance}}</p> -->
+        <p><nz-statistic [nzValue]="rewardBalance | number:'.8-8'" [nzTitle]="'Reward Balance'"></nz-statistic></p>
+      </div> 
+    </div>
+  </div>
+  <div nz-row nzGutter="16">
+    <div nz-col nzSpan="6">
+      <h5>Reward To Balance</h5>
+      <form nz-form [formGroup]="rewardToBalanceForm" (ngSubmit)="rewardToBalance()">
+        <nz-form-item>
+          <nz-form-control>
+            <input nz-input placeholder="수량" formControlName="rtbAmt" required>
+            <nz-form-explain
+                *ngIf="
+                  (rewardToBalanceForm.get('rtbAmt')?.dirty && rewardToBalanceForm.get('rtbAmt')?.errors) ||
+                  rewardToBalanceForm.get('rtbAmt')?.pending
+                "
+                >
+              <ng-container *ngIf="rewardToBalanceForm.get('rtbAmt')?.hasError('required')">
+                수량을 입력하세요.
+              </ng-container>
+              <ng-container *ngIf="rewardToBalanceForm.get('rtbAmt')?.hasError('invalid1')">
+                소수점 8자리 이하로 입력하세요.
+              </ng-container>
+            </nz-form-explain>
+          </nz-form-control>
+        </nz-form-item >
+        <nz-form-item>
+          <nz-form-control>
+            <button nz-button nzType="primary" [disabled]="!rewardToBalanceForm.valid">보내기</button>
+          </nz-form-control>
+        </nz-form-item >
+      </form>
+      <h5>Reward To Stake</h5>
+      <form nz-form [formGroup]="rewardToStakeForm" (ngSubmit)="rewardToStake()">
+        <nz-form-item>
+          <nz-form-control>
+            <input nz-input placeholder="수량" formControlName="rtsAmt" required>
+            <nz-form-explain
+                *ngIf="
+                  (rewardToStakeForm.get('rtsAmt')?.dirty && rewardToStakeForm.get('rtsAmt')?.errors) ||
+                  rewardToStakeForm.get('rtsAmt')?.pending
+                "
+                >
+              <ng-container *ngIf="rewardToStakeForm.get('rtsAmt')?.hasError('required')">
+                수량을 입력하세요.
+              </ng-container>
+              <ng-container *ngIf="rewardToStakeForm.get('rtsAmt')?.hasError('pattern')">
+                숫자를 입력하세요.
+              </ng-container>
+              <ng-container *ngIf="rewardToStakeForm.get('rtsAmt')?.hasError('invalid1')">
+                  소수점 8자리 이하로 입력하세요.
+                </ng-container>
+            </nz-form-explain>
+          </nz-form-control>
+        </nz-form-item >
+        <nz-form-item>
+          <nz-form-control>
+            <button nz-button nzType="primary" [disabled]="!rewardToStakeForm.valid">보내기</button>
+          </nz-form-control>
+        </nz-form-item >
+      </form>
+    </div>
+    <div nz-col nzSpan="18">
+      <nz-table #basicTable [nzData]="listOfData">
+        <tbody>
+          <tr *ngFor="let data of basicTable.data">
+            <td><img src="assets/images/b{{data.base}}t{{data.target}}.png"></td><!-- base가 1(main)이고 target이 2(stake)일 때, 그림파일명은 b1t2.png 이다 -->
+            <td>{{ data.from }}</td>
+            <td>{{ data.to }}</td>
+            <td>{{getTransactionText(data.base, data.target , data.receive)}}</td>
+            <td>{{ data.value | number:'.0-8' }}</td>
+          </tr>
+        </tbody>
+      </nz-table>  
+    </div>
+  </div> 
+</div>

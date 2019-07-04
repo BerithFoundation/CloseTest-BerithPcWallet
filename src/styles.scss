@@ -1,0 +1,79 @@
+/* You can add global styles to this file, and also import other style files */
+.logo {
+  width: 120px;
+  height: 31px;
+  //background: rgba(255, 255, 255, 0.2);
+  margin: 16px 24px 16px 0;
+  float: left;
+}
+
+.logo h3 {
+  color: rgba(255, 255, 255, 0.65);
+  font-family: 'Calibri';
+}
+
+[nz-menu] {
+  display: inline-block;
+}
+
+.account-box {
+  width: 280px;
+  height: 41px;
+  margin: 16px 0px 16px 0;
+  float: right;
+  line-height: 3px;
+}
+
+.account-box h6 {
+  color: #e8e8e8;
+}
+
+.account-box p {
+  color: #ff7875;
+}
+
+nz-footer {
+  line-height: 1.5;
+}
+
+.balance-box {
+  background: #f0f2f5;
+  padding: 5px 8px 5px 8px;
+  margin: 5px 0px 8px;
+  border: 2px solid #ffffff;
+}
+
+.balance-box h5 {
+  color: #595959;
+}
+
+.balance-box p {
+  text-align: right;
+  font-size: 16px;
+  color: #595959;
+}
+
+.total-balance-box {
+  background: #69c0ff;
+  //padding: 5px 0px 5px;
+}
+
+.main-balance-box {
+  background: #95de64;
+  //padding: 5px 0px 5px;
+}
+
+.stake-balance-box {
+  background: #fff566;
+  //padding: 5px 0px 5px;
+}
+
+.reward-balance-box {
+  background: #ffc069;
+  //padding: 5px 0px 5px;
+}
+
+/* ng-zorro-antd */
+.ant-layout-sider-trigger {
+  position: absolute;
+}

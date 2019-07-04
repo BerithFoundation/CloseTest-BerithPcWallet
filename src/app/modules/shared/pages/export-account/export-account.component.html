@@ -1,0 +1,23 @@
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Export Key Store" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk(fileinput.value)">
+    <form nz-form>
+      <nz-form-item>
+        <nz-form-control>
+            <input type="file" #fileinput  webkitdirectory>
+            <!-- <input type="file" id="fileup" onchange="this.select(); document.getElementById('filetext').value=document.body.text.toString();" >
+            <input type="text" id="filetext"  #filetext /> -->
+
+            <!-- <input type="file" name="FILE_NAME" size="35" >
+            <script>
+              
+              onchange="this.select(); document.getElementById('file_path').value=document.selection.createRange().text.toString();"
+              </scp
+          <input type="text" name="file_path" size="100"> -->
+        </nz-form-control>
+      </nz-form-item >
+    </form>
+  </nz-modal>
+
+  
+
+ 
+

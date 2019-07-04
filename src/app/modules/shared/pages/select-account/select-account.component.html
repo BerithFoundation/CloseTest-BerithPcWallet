@@ -1,0 +1,5 @@
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Select Account" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <nz-list [nzDataSource]="data" nzBordered [nzRenderItem]="item">
+    <ng-template #item let-item><nz-list-item [nzContent]="item" (click)="select(item);" [class.selected]="item == selectItem"></nz-list-item></ng-template>
+  </nz-list>
+</nz-modal>  

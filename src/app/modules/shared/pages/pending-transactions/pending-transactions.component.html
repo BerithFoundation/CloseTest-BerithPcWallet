@@ -1,0 +1,26 @@
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Peding Transactions" (nzOnCancel)="handleCancel()" (nzOnWithdraw) = "withdraw()" (nzOnOk)="handleOk()"
+[nzStyle]="{ top: '20px' }" [nzBodyStyle]="{ height: '600px' }" [nzWidth]="1600" [nzFooter]="modalFooter">
+  <nz-table #basicTable [nzData]="data">
+    <thead>
+      <tr>
+        <th>transactions type</th>
+        <th>No</th>
+        <th>value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data; index as i" (click)="select(i);" [class.selected]="i == selectIndex">
+        <td > {{ getTransactionText(data.base , data.target)  }}</td>
+        <td>{{HexToValueString2(data.nonce)}}</td>
+        <td>{{ HexToValueString(data.value)}}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <ng-template #modalFooter>
+    
+    <button nz-button nzType="default" (click)="handleCancel()">Cancel</button>
+    <button nz-button nzType="primary" (click)="withdraw()" >전송취소</button>
+    
+  </ng-template>
+</nz-modal>  
+

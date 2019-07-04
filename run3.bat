@@ -1,0 +1,1 @@
+berith.exe --datadir "C:\berith-chain\data" --bootnodes "enode://64e2ff6dade7f2bae827815f650998251ee8b735e4c179318033ad5eace2d9f568628d78a9854cb3c8f0c2134e7e4bfb6b515279c3f4924c847c84a85b2ec566@192.168.0.160:30301"
